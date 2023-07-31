@@ -24,7 +24,7 @@ func (r *AsciicastRecorder) checkTerminalSize() chan<- bool {
 					cols, rows = newCols, newRows
 					util.ReplaceWarningf("Current terminal size is %s.", fmt.Sprintf("%dx%d", cols, rows))
 				}
-				time.Sleep(50 * time.Millisecond)
+				time.Sleep(100 * time.Millisecond)
 			}
 		}
 	}()

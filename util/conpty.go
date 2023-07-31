@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"unsafe"
 
 	"golang.org/x/sys/windows"
@@ -239,6 +240,10 @@ func (cpty *ConPty) Write(p []byte) (int, error) {
 	return cpty.cmdIn.Write(p)
 }
 
+func (cpty *ConPty) GetPtyOut() io.Writer {
+	return cpty.ptyOut
+}
+
 type conPtyArgs struct {
 	coords _COORD
 }
@@ -287,9 +292,8 @@ func Start(commandLine string, options ...ConPtyOption) (*ConPty, error) {
 	if err != nil {
 		closeHandles(ptyIn, ptyOut, cmdIn, cmdOut)
 		win32ClosePseudoConsole(hPc)
-		return nil, fmt.Errorf("Failed to create console process: %v", err)
+		return nil, fmt.Errorf("failed to create console process: %v", err)
 	}
-
 	cpty := &ConPty{
 		hpc:    hPc,
 		pi:     pi,

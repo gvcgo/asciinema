@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"runtime"
 	"strings"
 	"time"
 
@@ -47,6 +48,16 @@ type Header struct {
 }
 
 func NewAsciicast(width, height int, duration float64, command, title string, frames []Frame, env map[string]string) *Asciicast {
+	// {"SHELL":"powershell.exe","TERM":"ms-terminal"}
+	env_ := &Env{Term: env["TERM"], Shell: env["SHELL"]}
+	if runtime.GOOS == "windows" {
+		env_.Term = "ms-terminal"
+		if strings.Contains(command, "powershell") {
+			env_.Shell = "powershell.exe"
+		} else {
+			env_.Shell = "cmd.exe"
+		}
+	}
 	return &Asciicast{
 		Version:   2,
 		Width:     width,
@@ -55,7 +66,7 @@ func NewAsciicast(width, height int, duration float64, command, title string, fr
 		Timestamp: time.Now().Unix(),
 		Command:   command,
 		Title:     title,
-		Env:       &Env{Term: env["TERM"], Shell: env["SHELL"]},
+		Env:       env_,
 		Stdout:    frames,
 	}
 }

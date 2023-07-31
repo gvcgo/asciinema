@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"runtime"
 	"strings"
 
 	"github.com/moqsien/asciinema/asciicast"
@@ -52,7 +53,10 @@ func (o *Options) Play(cast *asciicast.Asciicast) error {
 // Rec records the terminal and returns the asciicast and error.
 func (o *Options) Rec() (*asciicast.Asciicast, *bytes.Buffer, error) {
 	initAsciinema()
-	command := util.FirstNonBlank(os.Getenv("SHELL"), cfg.RecordCommand())
+	command := "powershell.exe -NoProfile"
+	if runtime.GOOS != "windows" {
+		command = util.FirstNonBlank(os.Getenv("SHELL"), cfg.RecordCommand())
+	}
 	title := o.Title
 	assumeYes := o.Yes
 
@@ -99,7 +103,7 @@ func (o *Options) Rec() (*asciicast.Asciicast, *bytes.Buffer, error) {
 func initAsciinema() {
 	env = environment()
 
-	if !util.IsUtf8Locale(env) {
+	if runtime.GOOS != "windows" && !util.IsUtf8Locale(env) {
 		fmt.Println("asciinema needs a UTF-8 native locale to run. Check the output of `locale` command.")
 		os.Exit(1)
 	}

@@ -2,6 +2,7 @@ package asciicast
 
 import (
 	"os"
+	"runtime"
 
 	"github.com/moqsien/asciinema/terminal"
 	"github.com/moqsien/asciinema/util"
@@ -29,7 +30,7 @@ func (r *AsciicastRecorder) Record(command, title string, maxWait float64, assum
 
 	rows, cols, _ := r.Terminal.Size()
 	if rows > warnRows || cols > warnCols {
-		if !assumeYes {
+		if !assumeYes && runtime.GOOS == "windows" {
 			doneChan := r.checkTerminalSize()
 			util.Warningf("Current terminal size is %vx%v.", cols, rows)
 			util.Warningf("It may be too big to be properly replayed on smaller screens.")

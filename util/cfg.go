@@ -3,9 +3,7 @@ package util
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
-	"path"
 	"path/filepath"
 
 	"gopkg.in/gcfg.v1"
@@ -96,7 +94,12 @@ func loadConfigFile(env map[string]string) (*ConfigFile, error) {
 		pathsToCheck = append(pathsToCheck,
 			filepath.Join(env["HOME"], ".asciinema", "config"))
 	}
-
+	if homeDir, _ := os.UserHomeDir(); homeDir != "" {
+		pathsToCheck = append(pathsToCheck,
+			filepath.Join(homeDir, ".config", "asciinema", "config"))
+		pathsToCheck = append(pathsToCheck,
+			filepath.Join(homeDir, ".asciinema", "config"))
+	}
 	cfgPath := ""
 	for _, pathToCheck := range pathsToCheck {
 		if _, err := os.Stat(pathToCheck); err == nil {
@@ -107,7 +110,7 @@ func loadConfigFile(env map[string]string) (*ConfigFile, error) {
 
 	if cfgPath == "" {
 		if len(pathsToCheck) == 0 {
-			return nil, errors.New("Need $HOME")
+			return nil, errors.New("need $HOME")
 		}
 		cfgPath = pathsToCheck[0]
 		if err := createConfigFile(cfgPath); err != nil {
@@ -130,6 +133,6 @@ func readConfigFile(cfgPath string) (*ConfigFile, error) {
 func createConfigFile(cfgPath string) error {
 	apiToken := NewUUID().String()
 	contents := fmt.Sprintf("[api]\ntoken = %v\n", apiToken)
-	os.MkdirAll(path.Dir(cfgPath), 0755)
-	return ioutil.WriteFile(cfgPath, []byte(contents), 0644)
+	os.MkdirAll(filepath.Dir(cfgPath), 0755)
+	return os.WriteFile(cfgPath, []byte(contents), 0644)
 }
