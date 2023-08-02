@@ -26,8 +26,6 @@ func NewRecorder() Recorder {
 }
 
 func (r *AsciicastRecorder) Record(command, title string, maxWait float64, assumeYes bool, env map[string]string) (Asciicast, error) {
-	// TODO: touch savePath to ensure writing is possible
-
 	rows, cols, _ := r.Terminal.Size()
 	if rows > warnRows || cols > warnCols {
 		if !assumeYes && runtime.GOOS == "windows" {
@@ -68,10 +66,4 @@ func (r *AsciicastRecorder) Record(command, title string, maxWait float64, assum
 
 	os.Unsetenv("ASCIINEMA_RECORDING")
 	return *asciicast, nil
-	// err = Save(asciicast, path)
-	// if err != nil {
-	// 	return err
-	// }
-
-	// return nil
 }

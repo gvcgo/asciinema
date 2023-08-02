@@ -36,17 +36,6 @@ type Asciicast struct {
 	Stdout    []Frame  `json:"stdout"`
 }
 
-type Header struct {
-	Version   int      `json:"version"`
-	Width     int      `json:"width"`
-	Height    int      `json:"height"`
-	Timestamp int64    `json:"timestamp"`
-	Duration  Duration `json:"duration,omitempty"`
-	Command   string   `json:"command,omitempty"`
-	Title     string   `json:"title,omitempty"`
-	Env       *Env     `json:"env"`
-}
-
 func NewAsciicast(width, height int, duration float64, command, title string, frames []Frame, env map[string]string) *Asciicast {
 	// {"SHELL":"powershell.exe","TERM":"ms-terminal"}
 	env_ := &Env{Term: env["TERM"], Shell: env["SHELL"]}
@@ -69,6 +58,17 @@ func NewAsciicast(width, height int, duration float64, command, title string, fr
 		Env:       env_,
 		Stdout:    frames,
 	}
+}
+
+type Header struct {
+	Version   int      `json:"version"`
+	Width     int      `json:"width"`
+	Height    int      `json:"height"`
+	Timestamp int64    `json:"timestamp"`
+	Duration  Duration `json:"duration,omitempty"`
+	Command   string   `json:"command,omitempty"`
+	Title     string   `json:"title,omitempty"`
+	Env       *Env     `json:"env"`
 }
 
 // asciinema play file.json
