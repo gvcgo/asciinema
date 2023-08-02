@@ -53,7 +53,7 @@ func (o *Options) Play(cast *asciicast.Asciicast) error {
 // Rec records the terminal and returns the asciicast and error.
 func (o *Options) Rec() (*asciicast.Asciicast, *bytes.Buffer, error) {
 	initAsciinema()
-	command := "powershell.exe -NoProfile"
+	command := "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile"
 	if runtime.GOOS != "windows" {
 		command = util.FirstNonBlank(os.Getenv("SHELL"), cfg.RecordCommand())
 	}
