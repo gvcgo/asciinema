@@ -1,27 +1,52 @@
-# WIP
-# asciinema V2 
-**This is not a complete project** This repo is a fork of the [asciinema](github.com/moqsien/asciinema) repo under the `golang` branch. It has been refactored a bit so that it can be used as a lib. As the originating branch is quite old, this lib will be behind some of the latest features and improvements that has been made to asciinema overall. 
+# Asciinema V2 
+This repo is a fork of the [asciinema](https://github.com/asciinema/asciinema) repo under the `golang` branch.
 
-### Implemented
+## Supported Platforms
+- Unix-like: Shell
+- Windows: PowerShell
+
+## Implemented
 - Record
 - Play
+- Auth
+- Upload
 
-The for was made to use with a local project, and all PR's are welcome. 
+The fork was made to use with a local project, and all PR's are welcome. 
+
+## Maybe, the only thing you need is **gvc**.
+[gvc](https://github.com/moqsien/gvc) is a powerful command-line tool with asciinema features implemented.
 
 ## Usage
 ### Install
 ```sh
-go get -u github.com/moqsien/asciinema # for v1 asciinema format
+go get -u github.com/moqsien/asciinema
 ```
 
+### Import
 ```go
 package main
 
-import "github.com/moqsien/asciinema"
+import (
+	"os"
+
+	"github.com/moqsien/asciinema/cmd"
+)
 
 func main() {
-    cli := asciinema.New()
-    cast, err := cli.Rec()
-    ...
+	var args []string
+	if len(os.Args) > 1 {
+		args = os.Args[1:]
+	}
+	cli := cmd.New(args...)
+	// fmt.Println(cli.Auth())
+	// cli.Rec()
+	cli.Play()
+	// info, _ := cli.Upload()
+	// fmt.Println(info)
 }
 ```
+## Thanks To
+- [go-asciinema](https://github.com/securisec/asciinema) provided most of the code for unix-like platforms.
+- [PowerSession-rs](https://github.com/Watfaq/PowerSession-rs) inspired me the conpty fixes.
+- [conpty-go](https://github.com/qsocket/conpty-go)
+- [conpty](https://github.com/UserExistsError/conpty)
