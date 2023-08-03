@@ -30,8 +30,8 @@ func (r *AsciicastPlayer) Play(asciicast *Asciicast, maxWait float64) error {
 		if maxWait > 0 && delay > maxWait {
 			delay = maxWait
 		}
-		time.Sleep(time.Duration(float64(time.Second) * delay))
 		r.Terminal.Write(frame.EventData)
+		time.Sleep(time.Duration(float64(time.Second) * delay))
 	}
 
 	return nil

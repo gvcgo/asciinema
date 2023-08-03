@@ -123,7 +123,7 @@ func EnableVirtualTerminalProcessing() error {
 		return fmt.Errorf("getConsoleMode: %v", err)
 	}
 	err = windows.SetConsoleMode(console, consoleMode|windows.ENABLE_VIRTUAL_TERMINAL_PROCESSING|windows.ENABLE_PROCESSED_INPUT)
-
+	// err = windows.SetConsoleMode(console, consoleMode|windows.ENABLE_VIRTUAL_TERMINAL_PROCESSING)
 	return fmt.Errorf("setConsoleMode: %v", err)
 }
 

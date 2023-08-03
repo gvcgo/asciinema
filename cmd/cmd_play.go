@@ -14,6 +14,7 @@ func (r *Runner) Play() error {
 	initAsciinema()
 	r.loadFile()
 	cmd := commands.NewPlayCommand()
+	r.MaxWait = 3.0
 	return cmd.Execute(r.Cast, r.MaxWait)
 }
 
