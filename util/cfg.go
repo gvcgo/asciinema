@@ -12,6 +12,7 @@ import (
 const (
 	DefaultAPIURL  = "https://asciinema.org"
 	DefaultCommand = "/bin/sh"
+	DefaultHomeEnv = "ASCIINEMA_CONFIG_HOME"
 )
 
 type ConfigAPI struct {
@@ -80,7 +81,7 @@ func GetConfig(env map[string]string) (*Config, error) {
 
 func loadConfigFile(env map[string]string) (*ConfigFile, error) {
 	pathsToCheck := make([]string, 0, 4)
-	if env["ASCIINEMA_CONFIG_HOME"] != "" {
+	if env[DefaultHomeEnv] != "" {
 		pathsToCheck = append(pathsToCheck,
 			filepath.Join(env["ASCIINEMA_CONFIG_HOME"], "config"))
 	}

@@ -27,13 +27,13 @@ func NewTerminal() Terminal {
 	return &Pty{Stdin: os.Stdin, Stdout: os.Stdout}
 }
 
-func (p *Pty) Size() (int, int, error) {
+func (p *Pty) Size() (rows, cols int, err error) {
 	coord, err := winpty.WinConsoleScreenSize()
-	return coord.X, coord.Y, err
+	return coord.Y, coord.X, err
 }
 
 func (p *Pty) Record(command string, w io.Writer) error {
-	width, height, _ := p.Size()
+	height, width, _ := p.Size()
 	if width == 0 {
 		width = 180
 	}

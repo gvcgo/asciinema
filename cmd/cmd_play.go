@@ -11,7 +11,6 @@ import (
 )
 
 func (r *Runner) Play() error {
-	initAsciinema()
 	r.loadFile()
 	cmd := commands.NewPlayCommand()
 	r.MaxWait = 3.0

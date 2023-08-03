@@ -13,7 +13,6 @@ import (
 )
 
 func (r *Runner) Rec() error {
-	initAsciinema()
 	command := "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
 	if ok, _ := util.PathIsExist(command); !ok {
 		command = "powershell.exe"

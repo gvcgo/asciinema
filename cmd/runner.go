@@ -34,13 +34,16 @@ func New(filename ...string) (r *Runner) {
 		name := filepath.Base(r.FilePath)
 		r.Title = strings.Split(name, ".")[0]
 	}
+	initAsciinema()
 	return
 }
 
 /*
 Envs
 */
-const Version = "1.2.0"
+const (
+	Version = "1.2.0"
+)
 
 var (
 	cfg *util.Config
