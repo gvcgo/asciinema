@@ -12,5 +12,9 @@ func main() {
 		args = os.Args[1:]
 	}
 	cli := cmd.New(args...)
+	// fmt.Println(cli.Auth())
+	// cli.Rec()
 	cli.Play()
+	// info, _ := cli.Upload()
+	// fmt.Println(info)
 }
