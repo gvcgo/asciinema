@@ -83,24 +83,14 @@ func loadConfigFile(env map[string]string) (*ConfigFile, error) {
 	pathsToCheck := make([]string, 0, 4)
 	if env[DefaultHomeEnv] != "" {
 		pathsToCheck = append(pathsToCheck,
-			filepath.Join(env["ASCIINEMA_CONFIG_HOME"], "config"))
+			filepath.Join(env["ASCIINEMA_CONFIG_HOME"], "asciinema_config"))
+	} else if homeDir, _ := os.UserHomeDir(); homeDir != "" {
+		pathsToCheck = append(pathsToCheck,
+			filepath.Join(homeDir, ".config", "asciinema", "asciinema_config"))
+		pathsToCheck = append(pathsToCheck,
+			filepath.Join(homeDir, ".asciinema", "asciinema_config"))
 	}
-	if env["XDG_CONFIG_HOME"] != "" {
-		pathsToCheck = append(pathsToCheck,
-			filepath.Join(env["XDG_CONFIG_HOME"], "asciinema", "config"))
-	}
-	if env["HOME"] != "" {
-		pathsToCheck = append(pathsToCheck,
-			filepath.Join(env["HOME"], ".config", "asciinema", "config"))
-		pathsToCheck = append(pathsToCheck,
-			filepath.Join(env["HOME"], ".asciinema", "config"))
-	}
-	if homeDir, _ := os.UserHomeDir(); homeDir != "" {
-		pathsToCheck = append(pathsToCheck,
-			filepath.Join(homeDir, ".config", "asciinema", "config"))
-		pathsToCheck = append(pathsToCheck,
-			filepath.Join(homeDir, ".asciinema", "config"))
-	}
+
 	cfgPath := ""
 	for _, pathToCheck := range pathsToCheck {
 		if _, err := os.Stat(pathToCheck); err == nil {
