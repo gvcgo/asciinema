@@ -24,13 +24,20 @@ func (f *Frame) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return err
 	}
-
-	f.Time = x.([]interface{})[0].(float64)
-
-	s := []byte(x.([]interface{})[1].(string))
-	b := make([]byte, len(s))
-	copy(b, s)
-	f.EventData = b
-
+	xx := x.([]interface{})
+	if len(xx) == 3 {
+		f.Time = xx[0].(float64)
+		f.EventType = xx[1].(string)
+		s := []byte(xx[2].(string))
+		b := make([]byte, len(s))
+		copy(b, s)
+		f.EventData = b
+	} else if len(xx) == 2 {
+		f.Time = xx[0].(float64)
+		s := []byte(xx[1].(string))
+		b := make([]byte, len(s))
+		copy(b, s)
+		f.EventData = b
+	}
 	return nil
 }

@@ -3,11 +3,14 @@ package main
 import (
 	"os"
 
-	"github.com/moqsien/asciinema/commands"
+	"github.com/moqsien/asciinema/cmd"
 )
 
 func main() {
-	cli := commands.New()
-	_, b, _ := cli.Rec()
-	os.WriteFile("./test_test.txt", b.Bytes(), os.ModePerm)
+	var args []string
+	if len(os.Args) > 1 {
+		args = os.Args[1:]
+	}
+	cli := cmd.New(args...)
+	cli.Play()
 }
