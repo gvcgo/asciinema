@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"github.com/moqsien/asciinema/asciicast"
+	"github.com/gvcgo/asciinema/asciicast"
 )
 
 type RecordCommand struct {

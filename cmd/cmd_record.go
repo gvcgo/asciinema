@@ -6,9 +6,9 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/moqsien/asciinema/asciicast"
-	"github.com/moqsien/asciinema/commands"
-	"github.com/moqsien/asciinema/util"
+	"github.com/gvcgo/asciinema/asciicast"
+	"github.com/gvcgo/asciinema/commands"
+	"github.com/gvcgo/asciinema/util"
 	"github.com/olivere/ndjson"
 )
 

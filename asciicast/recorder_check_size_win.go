@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/moqsien/asciinema/util"
+	"github.com/gvcgo/asciinema/util"
 )
 
 func (r *AsciicastRecorder) checkTerminalSize() chan<- bool {

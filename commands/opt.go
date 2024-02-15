@@ -9,8 +9,8 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/moqsien/asciinema/asciicast"
-	"github.com/moqsien/asciinema/util"
+	"github.com/gvcgo/asciinema/asciicast"
+	"github.com/gvcgo/asciinema/util"
 	"github.com/olivere/ndjson"
 )
 

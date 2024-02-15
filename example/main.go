@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/moqsien/asciinema/cmd"
+	"github.com/gvcgo/asciinema/cmd"
 )
 
 func main() {

@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/moqsien/asciinema/util/winpty"
+	"github.com/gvcgo/asciinema/util/winpty"
 	"golang.org/x/text/encoding/unicode"
 	"golang.org/x/text/transform"
 )

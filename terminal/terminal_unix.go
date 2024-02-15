@@ -12,9 +12,11 @@ import (
 	"unsafe"
 
 	"github.com/creack/termios/raw"
+	"github.com/gvcgo/asciinema/util"
 	"github.com/kr/pty"
-	"github.com/moqsien/asciinema/util"
-	"golang.org/x/crypto/ssh/terminal"
+
+	// "golang.org/x/crypto/ssh/terminal"
+	terminal "golang.org/x/term"
 	"golang.org/x/text/encoding/unicode"
 	"golang.org/x/text/transform"
 )
@@ -47,7 +49,7 @@ func (p *Pty) Record(command string, w io.Writer) error {
 	signal.Notify(signals, syscall.SIGWINCH)
 	defer signal.Stop(signals)
 	go func() {
-		for _ = range signals {
+		for range signals {
 			p.resize(master)
 		}
 	}()
