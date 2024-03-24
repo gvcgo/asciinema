@@ -10,9 +10,10 @@ import (
 )
 
 const (
-	DefaultAPIURL  = "https://asciinema.org"
-	DefaultCommand = "/bin/sh"
-	DefaultHomeEnv = "ASCIINEMA_CONFIG_HOME"
+	DefaultAPIURL         = "https://asciinema.org"
+	DefaultCommand        = "/bin/sh"
+	DefaultHomeEnv        = "ASCIINEMA_CONFIG_HOME"
+	DefaultConfigFileName = "aciinema.conf"
 )
 
 type ConfigAPI struct {
@@ -83,12 +84,12 @@ func loadConfigFile(env map[string]string) (*ConfigFile, error) {
 	pathsToCheck := make([]string, 0, 4)
 	if env[DefaultHomeEnv] != "" {
 		pathsToCheck = append(pathsToCheck,
-			filepath.Join(env["ASCIINEMA_CONFIG_HOME"], "asciinema_config"))
+			filepath.Join(env["ASCIINEMA_CONFIG_HOME"], DefaultConfigFileName))
 	} else if homeDir, _ := os.UserHomeDir(); homeDir != "" {
 		pathsToCheck = append(pathsToCheck,
-			filepath.Join(homeDir, ".config", "asciinema", "asciinema_config"))
+			filepath.Join(homeDir, ".config", "asciinema", DefaultConfigFileName))
 		pathsToCheck = append(pathsToCheck,
-			filepath.Join(homeDir, ".asciinema", "asciinema_config"))
+			filepath.Join(homeDir, ".asciinema", DefaultConfigFileName))
 	}
 
 	cfgPath := ""
@@ -124,6 +125,6 @@ func readConfigFile(cfgPath string) (*ConfigFile, error) {
 func createConfigFile(cfgPath string) error {
 	apiToken := NewUUID().String()
 	contents := fmt.Sprintf("[api]\ntoken = %v\n", apiToken)
-	os.MkdirAll(filepath.Dir(cfgPath), 0755)
-	return os.WriteFile(cfgPath, []byte(contents), 0644)
+	os.MkdirAll(filepath.Dir(cfgPath), 0o755)
+	return os.WriteFile(cfgPath, []byte(contents), 0o644)
 }
