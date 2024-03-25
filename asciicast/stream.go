@@ -1,18 +1,26 @@
 package asciicast
 
-import "time"
+import (
+	"sync"
+	"time"
+)
 
 type Stream struct {
 	Frames        []Frame
 	elapsedTime   time.Duration
 	lastWriteTime time.Time
 	maxWait       time.Duration
+	lock          *sync.Mutex
 }
 
 func NewStream(maxWait float64) *Stream {
+	if maxWait <= 0 {
+		maxWait = 1.0
+	}
 	return &Stream{
 		lastWriteTime: time.Now(),
 		maxWait:       time.Duration(maxWait*1000000) * time.Microsecond,
+		lock:          &sync.Mutex{},
 	}
 }
 
@@ -40,15 +48,19 @@ func (s *Stream) Duration() time.Duration {
 }
 
 func (s *Stream) incrementElapsedTime() time.Duration {
+	s.lock.Lock()
 	now := time.Now()
 	d := now.Sub(s.lastWriteTime)
 
 	if s.maxWait > 0 && d > s.maxWait {
 		d = s.maxWait
 	}
+	if d <= 0 {
+		d = time.Millisecond * 500
+	}
 
 	s.elapsedTime += d
 	s.lastWriteTime = now
-
+	s.lock.Unlock()
 	return s.elapsedTime
 }
