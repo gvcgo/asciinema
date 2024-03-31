@@ -37,7 +37,12 @@ func (p *Pty) Size() (int, int, error) {
 func (p *Pty) Record(command string, w io.Writer) error {
 	// start command in pty
 	cmd := exec.Command("sh", "-c", command)
+
 	cmd.Env = append(os.Environ(), "ASCIINEMA_REC=1")
+	if len(TerminalEnvs) > 0 {
+		cmd.Env = TerminalEnvs
+	}
+
 	master, err := pty.Start(cmd)
 	if err != nil {
 		return err

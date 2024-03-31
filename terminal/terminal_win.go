@@ -40,8 +40,14 @@ func (p *Pty) Record(command string, w io.Writer) error {
 	if height == 0 {
 		height = 100
 	}
+
+	envs := append(os.Environ(), "ASCIINEMA_REC=1")
+	if len(TerminalEnvs) > 0 {
+		envs = TerminalEnvs
+	}
+
 	// winpty.EnableVirtualTerminalProcessing()
-	cpty, err := winpty.Start(command, &winpty.COORD{X: width, Y: height})
+	cpty, err := winpty.Start(command, &winpty.COORD{X: width, Y: height}, envs)
 	if err != nil {
 		return err
 	}

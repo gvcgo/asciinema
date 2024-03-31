@@ -81,7 +81,7 @@ func GetStartupInfoExForPTY(hpc windows.Handle) (*StartupInfoEx, error) {
 	return &siEx, nil
 }
 
-func CreateConsoleProcessAttachedToPTY(hpc windows.Handle, commandLine string) (*windows.ProcessInformation, error) {
+func CreateConsoleProcessAttachedToPTY(hpc windows.Handle, commandLine string, envs []string) (*windows.ProcessInformation, error) {
 	cmdLine, err := windows.UTF16PtrFromString(commandLine)
 	if err != nil {
 		return nil, err
@@ -90,6 +90,20 @@ func CreateConsoleProcessAttachedToPTY(hpc windows.Handle, commandLine string) (
 	if err != nil {
 		return nil, err
 	}
+
+	// prepares envblock.
+	var envUint16Ptr *uint16
+	if len(envs) > 0 {
+		var envBlock []uint16
+		envBlock, err = CreateEnvBlock(envs)
+		if err != nil {
+			return nil, err
+		}
+		envUint16Ptr = &envBlock[0]
+	} else {
+		envUint16Ptr = nil
+	}
+
 	var pi windows.ProcessInformation
 	err = windows.CreateProcess(
 		nil, // use this if no args
@@ -98,7 +112,7 @@ func CreateConsoleProcessAttachedToPTY(hpc windows.Handle, commandLine string) (
 		nil,
 		false, // inheritHandle
 		windows.EXTENDED_STARTUPINFO_PRESENT,
-		nil,
+		envUint16Ptr,
 		nil,
 		&siEx.startupInfo,
 		&pi)
@@ -170,7 +184,7 @@ func (cpty *ConPty) Resize(width, height int) error {
 // ConPty API. If ConPty is not available, ErrConPtyUnsupported will be returned.
 // On successful return, an instance of ConPty is returned. You must call Close() on this to release
 // any resources associated with the process. To get the exit code of the process, you can call Wait().
-func Start(commandLine string, coord *COORD) (*ConPty, error) {
+func Start(commandLine string, coord *COORD, envs []string) (*ConPty, error) {
 	if !WinIsConPtyAvailable() {
 		return nil, ErrConPtyUnsupported
 	}
@@ -196,7 +210,7 @@ func Start(commandLine string, coord *COORD) (*ConPty, error) {
 		return nil, err
 	}
 
-	pi, err := CreateConsoleProcessAttachedToPTY(hPc, commandLine)
+	pi, err := CreateConsoleProcessAttachedToPTY(hPc, commandLine, envs)
 	if err != nil {
 		WinCloseHandles(ptyIn, ptyOut, cmdIn, cmdOut)
 		Win32ClosePseudoConsole(hPc)
