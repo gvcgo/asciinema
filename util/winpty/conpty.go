@@ -5,6 +5,7 @@ package winpty
 import (
 	"context"
 	"fmt"
+	"syscall"
 	"unsafe"
 
 	"golang.org/x/sys/windows"
@@ -104,14 +105,20 @@ func CreateConsoleProcessAttachedToPTY(hpc windows.Handle, commandLine string, e
 		envUint16Ptr = nil
 	}
 
+	flags := uint32(syscall.CREATE_UNICODE_ENVIRONMENT)
+	flags |= windows.CREATE_SUSPENDED
+	flags |= windows.CREATE_BREAKAWAY_FROM_JOB
+
+	// TODO: test
 	var pi windows.ProcessInformation
 	err = windows.CreateProcess(
 		nil, // use this if no args
 		cmdLine,
 		nil,
 		nil,
-		false, // inheritHandle
-		windows.EXTENDED_STARTUPINFO_PRESENT,
+		true, // inheritHandle
+		// windows.EXTENDED_STARTUPINFO_PRESENT,
+		flags,
 		envUint16Ptr,
 		nil,
 		&siEx.startupInfo,
