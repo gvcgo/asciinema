@@ -106,7 +106,7 @@ func CreateConsoleProcessAttachedToPTY(hpc windows.Handle, commandLine string, e
 	}
 
 	flags := uint32(syscall.CREATE_UNICODE_ENVIRONMENT)
-	flags |= 0x00080000
+	flags |= 0x00080000 // _EXTENDED_STARTUPINFO_PRESENT
 
 	var pi windows.ProcessInformation
 	err = windows.CreateProcess(
@@ -115,7 +115,6 @@ func CreateConsoleProcessAttachedToPTY(hpc windows.Handle, commandLine string, e
 		nil,
 		nil,
 		true, // inheritHandle
-		// windows.EXTENDED_STARTUPINFO_PRESENT,
 		flags,
 		envUint16Ptr,
 		nil,
