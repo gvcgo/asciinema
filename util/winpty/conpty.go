@@ -106,8 +106,8 @@ func CreateConsoleProcessAttachedToPTY(hpc windows.Handle, commandLine string, e
 	}
 
 	flags := uint32(syscall.CREATE_UNICODE_ENVIRONMENT)
-	flags |= windows.CREATE_SUSPENDED
-	flags |= windows.CREATE_BREAKAWAY_FROM_JOB
+	// flags |= windows.CREATE_SUSPENDED
+	// flags |= windows.CREATE_BREAKAWAY_FROM_JOB
 
 	// TODO: test
 	var pi windows.ProcessInformation
