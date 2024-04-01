@@ -3,7 +3,6 @@
 package terminal
 
 import (
-	"fmt"
 	"io"
 	"os"
 	"os/exec"
@@ -12,9 +11,9 @@ import (
 	"time"
 	"unsafe"
 
+	"github.com/creack/pty"
 	"github.com/creack/termios/raw"
 	"github.com/gvcgo/asciinema/util"
-	"github.com/kr/pty"
 
 	// "golang.org/x/crypto/ssh/terminal"
 	terminal "golang.org/x/term"
@@ -44,8 +43,6 @@ func (p *Pty) Record(command string, w io.Writer, envs ...string) error {
 	}
 
 	cmd.Env = envs
-	fmt.Println("cmd.Env: ", cmd.Env)
-
 	master, err := pty.Start(cmd)
 	if err != nil {
 		return err
