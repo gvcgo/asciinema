@@ -34,14 +34,15 @@ func (p *Pty) Size() (int, int, error) {
 	return pty.Getsize(p.Stdout)
 }
 
-func (p *Pty) Record(command string, w io.Writer) error {
+func (p *Pty) Record(command string, w io.Writer, envs ...string) error {
 	// start command in pty
 	cmd := exec.Command("sh", "-c", command)
 
-	cmd.Env = append(os.Environ(), "ASCIINEMA_REC=1")
-	if len(TerminalEnvs) > 0 {
-		cmd.Env = TerminalEnvs
+	if len(envs) == 0 {
+		envs = append(os.Environ(), "ASCIINEMA_REC=1")
 	}
+
+	cmd.Env = envs
 
 	master, err := pty.Start(cmd)
 	if err != nil {

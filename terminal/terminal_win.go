@@ -32,7 +32,7 @@ func (p *Pty) Size() (rows, cols int, err error) {
 	return coord.Y, coord.X, err
 }
 
-func (p *Pty) Record(command string, w io.Writer) error {
+func (p *Pty) Record(command string, w io.Writer, envs ...string) error {
 	height, width, _ := p.Size()
 	if width == 0 {
 		width = 180
@@ -41,9 +41,8 @@ func (p *Pty) Record(command string, w io.Writer) error {
 		height = 100
 	}
 
-	envs := append(os.Environ(), "ASCIINEMA_REC=1")
-	if len(TerminalEnvs) > 0 {
-		envs = TerminalEnvs
+	if len(envs) == 0 {
+		envs = append(os.Environ(), "ASCIINEMA_REC=1")
 	}
 
 	// winpty.EnableVirtualTerminalProcessing()
