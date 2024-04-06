@@ -39,3 +39,4 @@
 - [conpty-go](https://github.com/qsocket/conpty-go)
 - [conpty](https://github.com/UserExistsError/conpty)
 - [asciinema-edit](https://github.com/cirocosta/asciinema-edit)
+- [agg](https://github.com/asciinema/agg)
