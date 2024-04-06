@@ -7,6 +7,14 @@
 [中文](https://github.com/gvcgo/asciinema/blob/main/docs/README_CN.md) | [En](https://github.com/gvcgo/asciinema)
 
 ------------
+
+- [什么是asciinema?](#什么是asciinema)
+- [如何安装](#如何安装)
+- [子命令介绍](#子命令介绍)
+- [效果演示](#效果演示)
+- [感谢以下项目](#感谢以下项目)
+
+------------
 ## 什么是asciinema?
 
 **asciinema** [as-kee-nuh-muh] 是一个免费开源的终端会话录制和分享工具。
@@ -18,17 +26,17 @@
 
 ------------
 ## 如何安装
-- Install **acast** using **version manager** [vm](https://github.com/gvcgo/version-manager).
+- **推荐安装方法**：通过版本管理器[vm](https://github.com/gvcgo/version-manager)进行安装.
 ```bash
 vm use asciinema@v03.9
 ```
 
-- Install **acast** using **go**.
+- 通过**go**自带命令进行安装**acast**.
 ```bash
 go install github.com/gvcgo/asciinema/cmd/acast@latest
 ```
 
-- Download **acast** from **releases**.
+- 从**releases**页面下载后手动解压.
 [releases](https://github.com/gvcgo/asciinema/releases)
 
 ------------

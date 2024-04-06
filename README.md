@@ -7,6 +7,13 @@
 [中文](https://github.com/gvcgo/asciinema/blob/main/docs/README_CN.md) | [En](https://github.com/gvcgo/asciinema)
 
 ------------
+- [What is asciinema?](#what-is-asciinema)
+- [Installation](#installation)
+- [Subcommands](#subcommands)
+- [Demo](#demo)
+- [Thanks To](#thanks-to)
+
+------------
 ## What is asciinema?
 
 **asciinema** [as-kee-nuh-muh] is a free and open source solution for recording terminal sessions and sharing them on the web.
@@ -16,7 +23,7 @@ And this project is a **cross-platform** version of **asciinema** writtern in go
 
 ------------
 ## Installation
-- Install **acast** using **version manager** [vm](https://github.com/gvcgo/version-manager).
+- **Recommanded**: Install **acast** using **version manager** [vm](https://github.com/gvcgo/version-manager).
 ```bash
 vm use asciinema@v03.9
 ```
