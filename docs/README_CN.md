@@ -30,8 +30,10 @@
 | **upload** | xxx.cast | 上传cast文件到asciinema.org，需要**auth**授权. |
 | **version** | - | 显示acast的版本信息. |
 
-```
+------------
+
 ## 感谢以下项目
+
 - [go-asciinema](https://github.com/securisec/asciinema) provided most of the code for unix-like platforms.
 - [PowerSession-rs](https://github.com/Watfaq/PowerSession-rs) inspired me the conpty fixes.
 - [conpty-go](https://github.com/qsocket/conpty-go)

@@ -28,8 +28,10 @@ And this project is a **cross-platform** version of **asciinema** writtern in go
 | **upload** | xxx.cast | Uploads a cast to asciinema.org. |
 | **version** | - | Shows version info of acast. |
 
-```
+------------
+
 ## Thanks To
+
 - [go-asciinema](https://github.com/securisec/asciinema) provided most of the code for unix-like platforms.
 - [PowerSession-rs](https://github.com/Watfaq/PowerSession-rs) inspired me the conpty fixes.
 - [conpty-go](https://github.com/qsocket/conpty-go)
