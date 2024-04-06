@@ -158,6 +158,7 @@ func (c *Cli) initiate() {
 			c.cmd.Title, c.cmd.FilePath = handleFilePath(args[0])
 			if respStr, err := c.cmd.Upload(); err == nil {
 				gprint.PrintInfo(respStr)
+			} else {
 				gprint.PrintError("upload failed: %+v", err)
 			}
 		},

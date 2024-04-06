@@ -22,8 +22,8 @@ func (r *Runner) ConvertToGif(fPath, outFilePath string) (err error) {
 	if !strings.HasSuffix(outFilePath, ".gif") {
 		outFilePath += ".gif"
 	}
-	homeDir, _ := os.UserHomeDir()
-	_, err = gutils.ExecuteSysCommand(false, homeDir,
+	workDir, _ := os.Getwd()
+	_, err = gutils.ExecuteSysCommand(false, workDir,
 		"agg", fPath, outFilePath,
 	)
 	return
