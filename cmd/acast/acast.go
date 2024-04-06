@@ -250,7 +250,7 @@ func (c *Cli) initiate() {
 		Use:     "version",
 		Aliases: []string{"v"},
 		GroupID: GroupID,
-		Short:   "Show version info of acast.",
+		Short:   "Shows version info of acast.",
 		Run: func(cmd *cobra.Command, args []string) {
 			if len(GitHash) > 7 {
 				GitHash = GitHash[:7]
