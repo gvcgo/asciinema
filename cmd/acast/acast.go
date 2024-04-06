@@ -260,3 +260,17 @@ func (c *Cli) initiate() {
 	}
 	c.rootCmd.AddCommand(version)
 }
+
+func (c *Cli) Run() {
+	if c.rootCmd == nil {
+		return
+	}
+	if err := c.rootCmd.Execute(); err != nil {
+		gprint.PrintError("%+v", err)
+	}
+}
+
+func main() {
+	cli := NewCli()
+	cli.Run()
+}
