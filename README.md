@@ -29,6 +29,19 @@ And this project is a **cross-platform** version of **asciinema** writtern in go
 | **version** | - | Shows version info of acast. |
 
 ------------
+## Demo
+
+- **Normal Speed**
+[![asciicast](https://asciinema.org/a/651138.svg)](https://asciinema.org/a/651138)
+- **Normal Speed Converted to GIF**
+![normal](https://github.com/moqsien/img_repo/raw/main/test.gif)
+
+- **Speed x2**
+[![asciicast](https://asciinema.org/a/651140.svg)](https://asciinema.org/a/651140)
+- **Speed x2 Converted to GIF**
+![speedup](https://github.com/moqsien/img_repo/raw/main/test-speedup.gif)
+
+------------
 
 ## Thanks To
 
