@@ -1,0 +1,38 @@
+[![Go Report Card](https://img.shields.io/badge/go%20report-A+-brightgreen.svg?style=for-the-badge)](https://github.com/gvcgo/asciinema)
+[![GitHub License](https://github.com/gvcgo/asciinema?style=for-the-badge)](LICENSE)
+[![GitHub Release](https://github.com/gvcgo/asciinema?display_name=tag&style=for-the-badge)](https://github.com/gvcgo/asciinema/releases)
+[![PRs Card](https://img.shields.io/badge/PRs-vm-cyan.svg?style=for-the-badge)](https://github.com/gvcgo/asciinema/pulls)
+[![Issues Card](https://img.shields.io/badge/Issues-vm-pink.svg?style=for-the-badge)](https://github.com/gvcgo/asciinema/issues)
+
+[中文](https://github.com/gvcgo/asciinema/blob/main/docs/README_CN.md) | [En](https://github.com/gvcgo/asciinema)
+
+------------
+## 什么是asciinema?
+
+**asciinema** [as-kee-nuh-muh] 是一个免费开源的终端会话录制和分享工具。
+你可以访问 [asciinema.org](https://asciinema.org) 了解更多关于 **asciinema** 的信息。
+
+本项目是 **asciinema** 的跨平台版本，使用 **go** 语言编写，拥有完整的功能。你在MacOS/Linux/Windows可以使用它来 **创建、编辑、上传、转换(转换为gif)** 一个 **asciinema**格式的录像。
+
+注意，Windows下最好使用Powershell进行终端录制。
+
+------------
+## 子命令介绍
+| subcommand | args example | desc |
+|-------|-------|-------|
+| **auth** | - | 将本地ID授权到你注册的asciinema.org账户，这样你就可以使用本地ID来上传cast文件到官网了. |
+| **convert-to-gif** | input.cast output.gif | 将cast文件转换为gif动图，需要用到[agg](https://github.com/asciinema/agg)，建议使用[vm](https://github.com/gvcgo/asciinema)一键安装agg |
+| **cut** | --start=0.0 --end=2.9 input.cast output.cast | 剪切掉cast文件中不需要的时间段，单位是秒. |
+| **play** | input.cast | 播放cast文件. |
+| **quantize** | --ranges=1.0,5.0 | 更新特定区间内的延迟. |
+| **record** | xxx.cast | 录制cast文件. |
+| **speed** | --start=0.0 --end=2.9 --factor=0.7 | 通过一个参数因子，调节某个指定时间区间内的播放速度. |
+| **upload** | xxx.cast | 上传cast文件到asciinema.org，需要**auth**授权. |
+| **version** | - | 显示acast的版本信息. |
+
+```
+## 感谢以下项目
+- [go-asciinema](https://github.com/securisec/asciinema) provided most of the code for unix-like platforms.
+- [PowerSession-rs](https://github.com/Watfaq/PowerSession-rs) inspired me the conpty fixes.
+- [conpty-go](https://github.com/qsocket/conpty-go)
+- [conpty](https://github.com/UserExistsError/conpty)

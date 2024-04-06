@@ -1,49 +1,33 @@
-# Asciinema V2 
-This repo is a fork of the [asciinema](https://github.com/asciinema/asciinema) repo under the `golang` branch.
+[![Go Report Card](https://img.shields.io/badge/go%20report-A+-brightgreen.svg?style=for-the-badge)](https://github.com/gvcgo/asciinema)
+[![GitHub License](https://github.com/gvcgo/asciinema?style=for-the-badge)](LICENSE)
+[![GitHub Release](https://github.com/gvcgo/asciinema?display_name=tag&style=for-the-badge)](https://github.com/gvcgo/asciinema/releases)
+[![PRs Card](https://img.shields.io/badge/PRs-vm-cyan.svg?style=for-the-badge)](https://github.com/gvcgo/asciinema/pulls)
+[![Issues Card](https://img.shields.io/badge/Issues-vm-pink.svg?style=for-the-badge)](https://github.com/gvcgo/asciinema/issues)
 
-## Supported Platforms
-- Unix-like: Shell
-- Windows: PowerShell
+[中文](https://github.com/gvcgo/asciinema/blob/main/docs/README_CN.md) | [En](https://github.com/gvcgo/asciinema)
 
-## Implemented
-- Record
-- Play
-- Auth
-- Upload
+------------
+## What is asciinema?
 
-The fork was made to use with a local project, and all PR's are welcome. 
+**asciinema** [as-kee-nuh-muh] is a free and open source solution for recording terminal sessions and sharing them on the web.
+To learn about **asciinema**, you can visit [asciinema.org](https://asciinema.org).
 
-## Maybe, the only thing you need is **gvc**.
-[gvc](https://github.com/moqsien/gvc) is a powerful command-line tool with asciinema features implemented.
+And this project is a **cross-platform** version of **asciinema** writtern in go with full features. You can use it to **create, edit, upload, convert(to gif animation)** an asciinema cast on **MacOS/Linux/Windows**. 
 
-## Usage
-### Install
-```sh
-go get -u github.com/moqsien/asciinema
-```
+------------
+## Subcommands
+| subcommand | args example | desc |
+|-------|-------|-------|
+| **auth** | - | Authorizes to your asciinema.org account. |
+| **convert-to-gif** | input.cast output.gif | Converts a cast to gif animation. |
+| **cut** | --start=0.0 --end=2.9 input.cast output.cast | Removes a certain range of a cast. |
+| **play** | input.cast | Plays a cast. |
+| **quantize** | --ranges=1.0,5.0 | Updates the cast delays following quantization ranges. |
+| **record** | xxx.cast | Starts recording a cast. |
+| **speed** | --start=0.0 --end=2.9 --factor=0.7 | Updates the speed of a cast by certain factor. |
+| **upload** | xxx.cast | Uploads a cast to asciinema.org. |
+| **version** | - | Shows version info of acast. |
 
-### Import
-```go
-package main
-
-import (
-	"os"
-
-	"github.com/moqsien/asciinema/cmd"
-)
-
-func main() {
-	var args []string
-	if len(os.Args) > 1 {
-		args = os.Args[1:]
-	}
-	cli := cmd.New(args...)
-	// fmt.Println(cli.Auth())
-	// cli.Rec()
-	cli.Play()
-	// info, _ := cli.Upload()
-	// fmt.Println(info)
-}
 ```
 ## Thanks To
 - [go-asciinema](https://github.com/securisec/asciinema) provided most of the code for unix-like platforms.
