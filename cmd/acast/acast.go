@@ -122,4 +122,119 @@ func (c *Cli) initiate() {
 		},
 	}
 	c.rootCmd.AddCommand(record)
+
+	// Play.
+	play := &cobra.Command{
+		Use:     "play",
+		Aliases: []string{"p"},
+		Short:   "Plays a record.",
+		Long:    "Example: acast play <xxx.cast>",
+		Run: func(cc *cobra.Command, args []string) {
+			if len(args) == 0 {
+				cc.Help()
+				return
+			}
+			c.cmd.Title, c.cmd.FilePath = handleFilePath(args[0])
+			c.cmd.Play()
+		},
+	}
+	c.rootCmd.AddCommand(play)
+
+	// Upload.
+	upload := &cobra.Command{
+		Use:     "upload",
+		Aliases: []string{"u"},
+		Short:   "Uploads a record file to asciinema.org.",
+		Long:    "Example: acast upload <xxx.cast>",
+		Run: func(cc *cobra.Command, args []string) {
+			if len(args) == 0 {
+				cc.Help()
+				return
+			}
+			c.cmd.Title, c.cmd.FilePath = handleFilePath(args[0])
+			if respStr, err := c.cmd.Upload(); err == nil {
+				gprint.PrintInfo(respStr)
+				gprint.PrintError("upload failed: %+v", err)
+			}
+		},
+	}
+	c.rootCmd.AddCommand(upload)
+
+	// Convert to gif.
+	convert := &cobra.Command{
+		Use:     "convert-to-gif",
+		Aliases: []string{"cg"},
+		Short:   "Converts an asciinema cast to gif.",
+		Long:    "Example: acast cg <input.cast> <output.gif>",
+		Run: func(cc *cobra.Command, args []string) {
+			if len(args) < 2 {
+				cc.Help()
+				return
+			}
+			if err := c.cmd.ConvertToGif(args[0], args[1]); err != nil {
+				gprint.PrintError("convert failed: %+v", err)
+			}
+		},
+	}
+	c.rootCmd.AddCommand(convert)
+
+	// Cut.
+	cut := &cobra.Command{
+		Use:     "cut",
+		Aliases: []string{"c"},
+		Short:   "Removes a certain range of time frames.",
+		Long:    "Example: acast cut --start=1.0 --end=5.0 <in.cast> <out.cast>",
+		Run: func(cc *cobra.Command, args []string) {
+			start, _ := cc.Flags().GetFloat64("start")
+			end, _ := cc.Flags().GetFloat64("end")
+			if len(args) < 2 || end <= start {
+				cc.Help()
+				return
+			}
+			c.cmd.Cut(args[0], args[1], start, end)
+		},
+	}
+	cut.Flags().Float64P("start", "s", 0, "start time")
+	cut.Flags().Float64P("end", "e", 0, "end time")
+	c.rootCmd.AddCommand(cut)
+
+	// Speed.
+	speed := &cobra.Command{
+		Use:     "speed",
+		Aliases: []string{"s"},
+		Short:   "Updates the cast speed by a certain factor.",
+		Long:    "Example: acast speed --factor=0.7 --start=1.0 --end=5.0 <in.cast> <out.cast>",
+		Run: func(cc *cobra.Command, args []string) {
+			factor, _ := cc.Flags().GetFloat64("factor")
+			start, _ := cc.Flags().GetFloat64("start")
+			end, _ := cc.Flags().GetFloat64("end")
+			if len(args) < 2 || end <= start || factor <= 0 {
+				cc.Help()
+				return
+			}
+			c.cmd.Speed(args[0], args[1], factor, start, end)
+		},
+	}
+	speed.Flags().Float64P("factor", "f", 0.7, "speed factor")
+	speed.Flags().Float64P("start", "s", 0, "start time")
+	speed.Flags().Float64P("end", "e", 0, "end time")
+	c.rootCmd.AddCommand(speed)
+
+	// Quantize.
+	quantize := &cobra.Command{
+		Use:     "quantize",
+		Aliases: []string{"q"},
+		Short:   "Updates the cast delays following quantization ranges.",
+		Long:    "Example: acast quantize --ranges=1.0,5.0 <in.cast> <out.cast>",
+		Run: func(cc *cobra.Command, args []string) {
+			ranges, _ := cc.Flags().GetStringArray("ranges")
+			if len(ranges) == 0 || len(args) < 2 {
+				cc.Help()
+				return
+			}
+			c.cmd.Quantize(args[0], args[1], ranges)
+		},
+	}
+	quantize.Flags().StringArrayP("ranges", "r", []string{}, "quantization ranges")
+	c.rootCmd.AddCommand(quantize)
 }
