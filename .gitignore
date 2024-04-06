@@ -7,3 +7,4 @@ TODO
 build/darwin*
 build/windows*
 build/linux*
+.DS_Store
