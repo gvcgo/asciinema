@@ -36,3 +36,4 @@ And this project is a **cross-platform** version of **asciinema** writtern in go
 - [PowerSession-rs](https://github.com/Watfaq/PowerSession-rs) inspired me the conpty fixes.
 - [conpty-go](https://github.com/qsocket/conpty-go)
 - [conpty](https://github.com/UserExistsError/conpty)
+- [asciinema-edit](https://github.com/cirocosta/asciinema-edit)
