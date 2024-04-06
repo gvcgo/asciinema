@@ -17,6 +17,21 @@
 注意，Windows下最好使用Powershell进行终端录制。
 
 ------------
+## 如何安装
+- Install **acast** using **version manager** [vm](https://github.com/gvcgo/version-manager).
+```bash
+vm use asciinema@v03.9
+```
+
+- Install **acast** using **go**.
+```bash
+go install github.com/gvcgo/asciinema/cmd/acast@latest
+```
+
+- Download **acast** from **releases**.
+[releases](https://github.com/gvcgo/asciinema/releases)
+
+------------
 ## 子命令介绍
 | subcommand | args example | desc |
 |-------|-------|-------|

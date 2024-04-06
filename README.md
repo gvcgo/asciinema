@@ -15,6 +15,21 @@ To learn about **asciinema**, you can visit [asciinema.org](https://asciinema.or
 And this project is a **cross-platform** version of **asciinema** writtern in go with full features. You can use it to **create, edit, upload, convert(to gif animation)** an asciinema cast on **MacOS/Linux/Windows**. 
 
 ------------
+## Installation
+- Install **acast** using **version manager** [vm](https://github.com/gvcgo/version-manager).
+```bash
+vm use asciinema@v03.9
+```
+
+- Install **acast** using **go**.
+```bash
+go install github.com/gvcgo/asciinema/cmd/acast@latest
+```
+
+- Download **acast** from **releases**.
+[releases](https://github.com/gvcgo/asciinema/releases)
+
+------------
 ## Subcommands
 | subcommand | args example | desc |
 |-------|-------|-------|
