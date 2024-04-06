@@ -22,9 +22,9 @@ And this project is a **cross-platform** version of **asciinema** writtern in go
 | **convert-to-gif** | input.cast output.gif | Converts a cast to gif animation. |
 | **cut** | --start=0.0 --end=2.9 input.cast output.cast | Removes a certain range of a cast. |
 | **play** | input.cast | Plays a cast. |
-| **quantize** | --ranges=1.0,5.0 | Updates the cast delays following quantization ranges. |
+| **quantize** | --ranges=1.0,5.0 input.cast output.cast | Updates the cast delays following quantization ranges. |
 | **record** | xxx.cast | Starts recording a cast. |
-| **speed** | --start=0.0 --end=2.9 --factor=0.7 | Updates the speed of a cast by certain factor. |
+| **speed** | --start=0.0 --end=2.9 --factor=0.7 input.cast output.cast | Updates the speed of a cast by certain factor. |
 | **upload** | xxx.cast | Uploads a cast to asciinema.org. |
 | **version** | - | Shows version info of acast. |
 
