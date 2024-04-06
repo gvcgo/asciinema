@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -107,6 +108,7 @@ func (c *Cli) initiate() {
 	record := &cobra.Command{
 		Use:     "record",
 		Aliases: []string{"r"},
+		GroupID: GroupID,
 		Short:   "Creates a record.",
 		Long:    "Example: acast record <xxx.cast>",
 		Run: func(cc *cobra.Command, args []string) {
@@ -127,6 +129,7 @@ func (c *Cli) initiate() {
 	play := &cobra.Command{
 		Use:     "play",
 		Aliases: []string{"p"},
+		GroupID: GroupID,
 		Short:   "Plays a record.",
 		Long:    "Example: acast play <xxx.cast>",
 		Run: func(cc *cobra.Command, args []string) {
@@ -144,6 +147,7 @@ func (c *Cli) initiate() {
 	upload := &cobra.Command{
 		Use:     "upload",
 		Aliases: []string{"u"},
+		GroupID: GroupID,
 		Short:   "Uploads a record file to asciinema.org.",
 		Long:    "Example: acast upload <xxx.cast>",
 		Run: func(cc *cobra.Command, args []string) {
@@ -164,6 +168,7 @@ func (c *Cli) initiate() {
 	convert := &cobra.Command{
 		Use:     "convert-to-gif",
 		Aliases: []string{"cg"},
+		GroupID: GroupID,
 		Short:   "Converts an asciinema cast to gif.",
 		Long:    "Example: acast cg <input.cast> <output.gif>",
 		Run: func(cc *cobra.Command, args []string) {
@@ -182,6 +187,7 @@ func (c *Cli) initiate() {
 	cut := &cobra.Command{
 		Use:     "cut",
 		Aliases: []string{"c"},
+		GroupID: GroupID,
 		Short:   "Removes a certain range of time frames.",
 		Long:    "Example: acast cut --start=1.0 --end=5.0 <in.cast> <out.cast>",
 		Run: func(cc *cobra.Command, args []string) {
@@ -202,6 +208,7 @@ func (c *Cli) initiate() {
 	speed := &cobra.Command{
 		Use:     "speed",
 		Aliases: []string{"s"},
+		GroupID: GroupID,
 		Short:   "Updates the cast speed by a certain factor.",
 		Long:    "Example: acast speed --factor=0.7 --start=1.0 --end=5.0 <in.cast> <out.cast>",
 		Run: func(cc *cobra.Command, args []string) {
@@ -224,6 +231,7 @@ func (c *Cli) initiate() {
 	quantize := &cobra.Command{
 		Use:     "quantize",
 		Aliases: []string{"q"},
+		GroupID: GroupID,
 		Short:   "Updates the cast delays following quantization ranges.",
 		Long:    "Example: acast quantize --ranges=1.0,5.0 <in.cast> <out.cast>",
 		Run: func(cc *cobra.Command, args []string) {
@@ -237,4 +245,18 @@ func (c *Cli) initiate() {
 	}
 	quantize.Flags().StringArrayP("ranges", "r", []string{}, "quantization ranges")
 	c.rootCmd.AddCommand(quantize)
+
+	version := &cobra.Command{
+		Use:     "version",
+		Aliases: []string{"v"},
+		GroupID: GroupID,
+		Short:   "Show version info of acast.",
+		Run: func(cmd *cobra.Command, args []string) {
+			if len(GitHash) > 7 {
+				GitHash = GitHash[:7]
+			}
+			fmt.Println(gprint.CyanStr("%s(%s)", GitTag, GitHash))
+		},
+	}
+	c.rootCmd.AddCommand(version)
 }
