@@ -5,12 +5,43 @@ import (
 	"encoding/json"
 	"os"
 	"runtime"
+	"strings"
 
 	"github.com/gvcgo/asciinema/asciicast"
 	"github.com/gvcgo/asciinema/commands"
 	"github.com/gvcgo/asciinema/util"
 	"github.com/olivere/ndjson"
 )
+
+var descardingList []string = []string{
+	`?\u001b\\\u001b[6n`,
+}
+
+func verify(line string) bool {
+	for _, s := range descardingList {
+		if strings.Contains(line, s) {
+			return false
+		}
+	}
+	return true
+}
+
+func FixCast(fPath string) {
+	content, _ := os.ReadFile(fPath)
+	if len(content) > 0 {
+		sList := strings.Split(string(content), "\n")
+		data := []string{}
+		for _, line := range sList {
+			if verify(line) {
+				data = append(data, line)
+			}
+		}
+		if len(data) > 0 {
+			s := strings.Join(data, "\n")
+			os.WriteFile(fPath, []byte(s), os.ModePerm)
+		}
+	}
+}
 
 func (r *Runner) Rec() error {
 	command := "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
@@ -58,5 +89,8 @@ func (r *Runner) Rec() error {
 	}
 
 	err = os.WriteFile(r.FilePath, buf.Bytes(), os.ModePerm)
+	if err == nil {
+		FixCast(r.FilePath)
+	}
 	return err
 }
