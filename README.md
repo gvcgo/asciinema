@@ -1,6 +1,6 @@
 [![Go Report Card](https://img.shields.io/badge/go%20report-A+-brightgreen.svg?style=for-the-badge)](https://github.com/gvcgo/asciinema)
-[![GitHub License](https://github.com/gvcgo/asciinema?style=for-the-badge)](LICENSE)
-[![GitHub Release](https://github.com/gvcgo/asciinema?display_name=tag&style=for-the-badge)](https://github.com/gvcgo/asciinema/releases)
+<!-- [![GitHub License](https://github.com/gvcgo/asciinema?style=for-the-badge)](LICENSE)
+[![GitHub Release](https://github.com/gvcgo/asciinema?display_name=tag&style=for-the-badge)](https://github.com/gvcgo/asciinema/releases) -->
 [![PRs Card](https://img.shields.io/badge/PRs-vm-cyan.svg?style=for-the-badge)](https://github.com/gvcgo/asciinema/pulls)
 [![Issues Card](https://img.shields.io/badge/Issues-vm-pink.svg?style=for-the-badge)](https://github.com/gvcgo/asciinema/issues)
 
