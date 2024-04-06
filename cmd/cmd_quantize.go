@@ -114,5 +114,9 @@ func (r *Runner) Quantize(inFilePath, outFilePath string, ranges []string) (err 
 		return
 	}
 	defer t.Close()
-	return t.Transform()
+	err = t.Transform()
+	if err == nil {
+		FixHeaderForEditOperations(inFilePath, outFilePath)
+	}
+	return err
 }

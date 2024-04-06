@@ -27,5 +27,9 @@ func (r *Runner) Cut(inFilePath, outFilePath string, start, end float64) error {
 		return err
 	}
 	defer t.Close()
-	return t.Transform()
+	err = t.Transform()
+	if err == nil {
+		FixHeaderForEditOperations(inFilePath, outFilePath)
+	}
+	return err
 }
