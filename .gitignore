@@ -4,6 +4,6 @@ TODO
 *.txt
 *.cast
 *.zip
-build/darwin_*
-build/windows_*
-build/linux_*
+build/darwin*
+build/windows*
+build/linux*
