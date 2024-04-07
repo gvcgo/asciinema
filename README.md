@@ -25,7 +25,7 @@ And this project is a **cross-platform** version of **asciinema** writtern in go
 ## Installation
 - **Recommanded**: Install **acast** using **version manager** [vm](https://github.com/gvcgo/version-manager).
 ```bash
-vm use asciinema@v03.9
+vm use asciinema@v0.3.9
 ```
 
 - Install **acast** using **go**.

@@ -20,7 +20,7 @@
 **asciinema** [as-kee-nuh-muh] 是一个免费开源的终端会话录制和分享工具。
 你可以访问 [asciinema.org](https://asciinema.org) 了解更多关于 **asciinema** 的信息。
 
-本项目是 **asciinema** 的跨平台版本，使用 **go** 语言编写，拥有完整的功能。你在MacOS/Linux/Windows可以使用它来 **创建、编辑、上传、转换(转换为gif)** 一个 **asciinema**格式的录像。
+本项目是 **asciinema** 的跨平台版本，使用 **go** 语言编写，拥有完整的功能，比[官方asciinema工具](https://github.com/asciinema/asciinema)更强大，更方便好用。你可以在MacOS/Linux/Windows上使用它来 **创建、编辑、上传、转换(转换为gif)** 一个 **asciinema**格式的录像。
 
 注意，Windows下最好使用Powershell进行终端录制。
 
@@ -28,7 +28,7 @@
 ## 如何安装
 - **推荐安装方法**：通过版本管理器[vm](https://github.com/gvcgo/version-manager)进行安装.
 ```bash
-vm use asciinema@v03.9
+vm use asciinema@v0.3.9
 ```
 
 - 通过**go**自带命令进行安装**acast**.
