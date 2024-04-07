@@ -22,7 +22,7 @@
 
 本项目是 **asciinema** 的跨平台版本，使用 **go** 语言编写，拥有完整的功能，比[官方asciinema工具](https://github.com/asciinema/asciinema)更强大，更方便好用。你可以在MacOS/Linux/Windows上使用它来 **创建、编辑、上传、转换(转换为gif)** 一个 **asciinema**格式的录像。
 
-注意，Windows下最好使用Powershell进行终端录制。
+当你需要写文档，做教程，分享终端相关的操作时，**asciinema**会非常实用。
 
 ------------
 ## 如何安装
