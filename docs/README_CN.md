@@ -44,7 +44,7 @@ go install github.com/gvcgo/asciinema/cmd/acast@latest
 | subcommand | args example | desc |
 |-------|-------|-------|
 | **auth** | - | 将本地ID授权到你注册的asciinema.org账户，这样你就可以使用本地ID来上传cast文件到官网了. |
-| **convert-to-gif** | input.cast output.gif | 将cast文件转换为gif动图，需要用到[agg](https://github.com/asciinema/agg)，建议使用[vm](https://github.com/gvcgo/asciinema)一键安装agg |
+| **convert-to-gif** | input.cast output.gif | 将cast文件转换为gif动图，需要用到[agg](https://github.com/asciinema/agg)，建议使用[vm](https://github.com/gvcgo/version-manager)一键安装agg |
 | **cut** | --start=0.0 --end=2.9 input.cast output.cast | 剪切掉cast文件中不需要的时间段，单位是秒. |
 | **play** | input.cast | 播放cast文件. |
 | **quantize** | --ranges=1.0,5.0 input.cast output.cast | 更新特定区间内的延迟. |
