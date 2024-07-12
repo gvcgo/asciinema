@@ -26,7 +26,7 @@
 
 ------------
 ## 如何安装
-- **推荐安装方法**：通过版本管理器[vmr](https://github.com/gvcgo/version-manager)进行安装.
+- **推荐安装方法**：通过版本管理器[vmr](https://vdocs.vmr.us.kg/zh-cn/)进行安装.
 
 - 通过**go**自带命令进行安装**acast**.
 ```bash
